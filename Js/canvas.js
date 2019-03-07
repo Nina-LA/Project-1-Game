@@ -165,7 +165,7 @@ function draw (){
          "Chun Li Kicks-32.png",
          "Chun Li Kicks-33.png",
          "Chun Li Kicks-0.png"]
-
+// Functions for Chun
       var Chun = {
         x: 400,
         y: 300,

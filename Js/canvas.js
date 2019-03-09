@@ -239,9 +239,7 @@ function draw (){
         }
 
         if(Ryu.life==0) {
-            window.location = "gameover/ryu.html"
-            var audio = new Audio('sound/Game Over.mp3');
-            audio.play();
+            window.location = "gameover/Chun.html"
         }
     }
      function scoringChun() {
@@ -268,9 +266,7 @@ function draw (){
         }
 
         if(Chun.life==0) {
-            window.location = "gameover/Chun.html"
-            var audio = new Audio('sound/Game Over.mp3');
-            audio.play();
+            window.location = "gameover/ryu.html"
         }
 
       }

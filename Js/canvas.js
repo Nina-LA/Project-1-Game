@@ -31,7 +31,7 @@ var hadouken = new Hadouken(300, 500, 3, ctx);
 
 function draw (){
 
-    ctx.clearRect(0, 0, 1300, 800);
+    ctx.clearRect(0, 0, 1300, 500);
     ctx.drawImage(imgRyu, Ryu.x, Ryu.y-Ryu.jump, 100, 100);
     ctx.drawImage(imgChun, Chun.x, Chun.y-Chun.jump, 100, 100);
     ctx.drawImage(imgHadouken, hadouken.x, hadouken.y, 40, 40);
@@ -72,8 +72,8 @@ function draw (){
     
 
     var Ryu = {
-        x: 30,
-        y: 300,
+        x: 400,
+        y: 200,
         jump: 0,
         direction: 1,
         life: 100,
@@ -82,14 +82,11 @@ function draw (){
             setTimeout(function(){
                 imgRyu.src = "images/ryu.png";
             }, 500)
-            if(Math.abs(Ryu.x-Chun.x) < 100) {
-                // Vérification du fonctionnement du calcul
-                console.log(Chun.life);
-                Chun.life--
-        
-                var scoreChun = document.getElementById("lifeChun")
-                scoreChun.innerHTML = Chun.life;
-            }
+
+            var audio = new Audio('sound/Ryu Kick.wav');
+            audio.play();
+
+            scoreChun();
         }, 
         moveUp:    function() { this.y -= 25 ;},
         moveDown:  function() { this.y += 25 },
@@ -110,12 +107,12 @@ function draw (){
             setTimeout(function(){
                 imgRyu.src = "images/ryu.png";
             }, 500)
-            if(hadouken.x-Chun.x < 100) {
-                console.log(Chun.life)
-                Chun.life--
-                // var scoreChun = document.getElementById("#lifeChun")
-                // scoreChun.innerHTML = Chun.life;
-            }
+            
+            var audio = new Audio('sound/hadouken.mp3');
+            audio.play();
+            
+            scoreChun();
+            
         },
         hurricane: function() {
                 for(var i=0; i<hurricaneRyu.length; i++){
@@ -123,11 +120,10 @@ function draw (){
                         imgRyu.src = "images/" + hurricaneRyu[this.i];
                     }.bind({i: i}), 100*i);
                 }
-                if(Math.abs(Ryu.x-Chun.x) < 100) {
-                    Chun.life--
-                    var scoreChun = document.getElementById("#lifeChun")
-                    scoreChun.innerHTML = Chun.life;
-                }
+                var audio = new Audio('sound/Ryu Hurricane.wav');
+                audio.play();
+
+                scoreChun();
             }
     }
     var imagesChun =
@@ -143,7 +139,6 @@ function draw (){
          "Chun Li Kicks-10.png",
          "Chun Li Kicks-11.png",
          "Chun Li Kicks-12.png",
-         "Chun Li Kicks-13.png",
          "Chun Li Kicks-14.png",
          "Chun Li Kicks-15.png",
          "Chun Li Kicks-16.png",
@@ -164,25 +159,24 @@ function draw (){
          "Chun Li Kicks-31.png",
          "Chun Li Kicks-32.png",
          "Chun Li Kicks-33.png",
-         "Chun Li Kicks-0.png"]
+         "chun.png"]
 // Functions for Chun
       var Chun = {
-        x: 400,
-        y: 300,
+        x: 800,
+        y: 200,
         jump: 0,
         direction: 1,
         life: 100,
         kick: function() {
-            imgChun.src = "images/Chun Li Kicks-13.png";
+            imgChun.src = "images/Chun Li Kicks-11.png";
             setTimeout(function(){
                 imgChun.src = "images/chun.png";
             }, 500)
-            if(Math.abs(Chun.x-Ryu.x) < 100) {
-                console.log("after Kick" + Ryu.life)
-                Ryu.life--
-                // var scoreRyu = document.getElementById("#lifeRyu")
-                // scoreRyu.innerHTML = Ryu.life;
-            }
+
+            var audio = new Audio('sound/Chun kick.wav');
+            audio.play();
+
+            scoreRyu();
         },
         retourne: function(){
             for(var i=0; i<imagesChun.length; i++){
@@ -190,11 +184,15 @@ function draw (){
                     imgChun.src = "images/" + imagesChun[this.i];
                 }.bind({i: i}), 100*i);
             }
-            console.log("After Retourne" + Ryu.life)
-            return Ryu.life--
 
-            // var scoreRyu = document.getElementById("#lifeRyu")
-            // scoreRyu.innerHTML = Ryu.life;
+            var audio = new Audio('sound/Chun retourne.wav');
+            audio.play();
+            scoreRyu();
+            //if(Math.abs(Chun.x-Ryu.x) < 100) {
+                //Ryu.life-=10
+                //var scoreRyu = document.getElementById("lifeRyu")
+               // scoreRyu.innerHTML = Ryu.life;
+           // }
         },
         moveUp:    function() { this.y -= 25 },
         moveDown:  function() { this.y += 25 },
@@ -211,6 +209,30 @@ function draw (){
         }
       }
 
+      function scoreRyu() {
+        if(Math.abs(Chun.x-Ryu.x) < 100) {
+            Ryu.life-=10
+            var scoreRyu = document.getElementById("lifeRyu")
+            scoreRyu.innerHTML = Ryu.life;
+        }
+
+        // if (score.Ryu<100 && )
+    }
+     function scoreChun() {
+        if(Math.abs(Ryu.x-Chun.x) < 100) {
+            Chun.life-=10
+            var scoreChun = document.getElementById("lifeChun")
+            scoreChun.innerHTML = Chun.life;
+        }
+
+        if(hadouken.x-Chun.x < 100) {
+            console.log(Chun.life)
+            Chun.life-=10
+            var scoreChun = document.getElementById("lifeChun")
+            scoreChun.innerHTML = Chun.life;
+        }
+
+      }
       
     
       document.onkeydown = function(e) {

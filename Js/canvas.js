@@ -91,11 +91,11 @@ function draw (){
         moveUp:    function() { this.y -= 25 ;},
         moveDown:  function() { this.y += 25 },
         moveForward:  function() { 
-            this.x -= 25 
+            this.x += 25 
         },
         moveBackward: function() { 
             if(Ryu.x<Chun.x-30) {
-                this.x += 25;
+                this.x -= 25;
             }
         },
         sautillement: function(){
@@ -131,6 +131,7 @@ function draw (){
 
                 scoringChun();
             }
+        
     }
     var imagesChun =
         ["Chun Li Kicks-0.png",
@@ -238,7 +239,7 @@ function draw (){
         }
 
         if(Ryu.life==0) {
-            window.location = "/home.html"
+            window.location = "gameover/Ryu.html"
             var audio = new Audio('sound/Game Over.mp3');
             audio.play();
         }
@@ -267,7 +268,7 @@ function draw (){
         }
 
         if(Chun.life==0) {
-            window.location = "/home.html"
+            window.location = "gameover/Chun.html"
             var audio = new Audio('sound/Game Over.mp3');
             audio.play();
         }
@@ -277,19 +278,19 @@ function draw (){
     
       document.onkeydown = function(e) {
         switch (e.keyCode) {
-          case 65: Ryu.moveUp(); break;
-          case 69: Ryu.moveDown(); break;
-          case 81: Ryu.moveForward(); break;
-          case 68: Ryu.moveBackward(); break;
+          case 81: Ryu.moveUp(); break;
+          case 83: Ryu.moveDown(); break;
+          case 65: Ryu.moveForward(); break;
+          case 90: Ryu.moveBackward(); break;
           case 87: Ryu.kickass(); break;
-          case 85: Chun.moveUp(); break;
-          case 80: Chun.moveDown(); break;
-          case 74: Chun.moveForward(); break;
-          case 77: Chun.moveBackward(); break;
+          case 86: Ryu.throwHadouken(); break;
+          case 88: Ryu.hurricane(); break;
+          case 76: Chun.moveUp(); break;
+          case 77: Chun.moveDown(); break;
+          case 79: Chun.moveForward(); break;
+          case 80: Chun.moveBackward(); break;
           case 78: Chun.kick(); break;
           case 66: Chun.retourne(); break;
-          case 86: Ryu.throwHadouken(); break;
-          case 83: Ryu.hurricane(); break;
         }
       }
   

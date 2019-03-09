@@ -55,3 +55,19 @@ button a {
     font-size: 40px;
     margin-right: 100px;
 }
+
+#chunwon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#ryuwon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h2{
+    text-align: center;
+}

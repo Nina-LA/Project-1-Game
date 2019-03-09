@@ -86,12 +86,18 @@ function draw (){
             var audio = new Audio('sound/Ryu Kick.wav');
             audio.play();
 
-            scoreChun();
+            scoringChun();
         }, 
         moveUp:    function() { this.y -= 25 ;},
         moveDown:  function() { this.y += 25 },
-        moveForward:  function() { this.x -= 25 },
-        moveBackward: function() { this.x += 25 },
+        moveForward:  function() { 
+            this.x -= 25 
+        },
+        moveBackward: function() { 
+            if(Ryu.x<Chun.x-30) {
+                this.x += 25;
+            }
+        },
         sautillement: function(){
             this.jump+=this.direction*1
             if(this.jump==20){
@@ -111,7 +117,7 @@ function draw (){
             var audio = new Audio('sound/hadouken.mp3');
             audio.play();
             
-            scoreChun();
+            scoringChun();
             
         },
         hurricane: function() {
@@ -123,7 +129,7 @@ function draw (){
                 var audio = new Audio('sound/Ryu Hurricane.wav');
                 audio.play();
 
-                scoreChun();
+                scoringChun();
             }
     }
     var imagesChun =
@@ -176,7 +182,7 @@ function draw (){
             var audio = new Audio('sound/Chun kick.wav');
             audio.play();
 
-            scoreRyu();
+            scoringRyu();
         },
         retourne: function(){
             for(var i=0; i<imagesChun.length; i++){
@@ -187,7 +193,7 @@ function draw (){
 
             var audio = new Audio('sound/Chun retourne.wav');
             audio.play();
-            scoreRyu();
+            scoringRyu();
             //if(Math.abs(Chun.x-Ryu.x) < 100) {
                 //Ryu.life-=10
                 //var scoreRyu = document.getElementById("lifeRyu")
@@ -196,8 +202,14 @@ function draw (){
         },
         moveUp:    function() { this.y -= 25 },
         moveDown:  function() { this.y += 25 },
-        moveForward:  function() { this.x -= 25 },
-        moveBackward: function() { this.x += 25 },
+        moveForward:  function() { 
+            if(Chun.x>Ryu.x+30) {
+                this.x -= 25;
+            }
+        },
+        moveBackward: function() { 
+                this.x += 25;
+         },
         sautillement: function(){
             this.jump+=this.direction*1
             if(this.jump==20){
@@ -209,27 +221,55 @@ function draw (){
         }
       }
 
-      function scoreRyu() {
+      function scoringRyu() {
         if(Math.abs(Chun.x-Ryu.x) < 100) {
-            Ryu.life-=10
-            var scoreRyu = document.getElementById("lifeRyu")
-            scoreRyu.innerHTML = Ryu.life;
+            if(Ryu.life>0) {
+                Ryu.life-=10
+                var scoreRyu = document.getElementById("lifeRyu")
+                scoreRyu.innerHTML = Ryu.life;
+            }
         }
 
-        // if (score.Ryu<100 && )
+        if (Ryu.life<70 && Ryu.life>=50){
+            scoreRyu.style.backgroundColor = "yellow";
+        }
+       else if (Ryu.life<50 && Ryu.life>=0){
+        scoreRyu.style.backgroundColor = "red";
+        }
+
+        if(Ryu.life==0) {
+            window.location = "/home.html"
+            var audio = new Audio('sound/Game Over.mp3');
+            audio.play();
+        }
     }
-     function scoreChun() {
+     function scoringChun() {
+        var scoreChun = document.getElementById("lifeChun")
         if(Math.abs(Ryu.x-Chun.x) < 100) {
-            Chun.life-=10
-            var scoreChun = document.getElementById("lifeChun")
-            scoreChun.innerHTML = Chun.life;
+            if(Chun.life>0) {
+                Chun.life-=10
+                scoreChun.innerHTML = Chun.life;
+            }
         }
 
         if(hadouken.x-Chun.x < 100) {
-            console.log(Chun.life)
+            if(Chun.life>0) {
             Chun.life-=10
-            var scoreChun = document.getElementById("lifeChun")
             scoreChun.innerHTML = Chun.life;
+            }
+        }
+
+        if (Chun.life<70 && Chun.life>=50){
+            scoreChun.style.backgroundColor = "yellow";
+        }
+       else if (Chun.life<50 && Chun.life>=0){
+        scoreChun.style.backgroundColor = "red";
+        }
+
+        if(Chun.life==0) {
+            window.location = "/home.html"
+            var audio = new Audio('sound/Game Over.mp3');
+            audio.play();
         }
 
       }

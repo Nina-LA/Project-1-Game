@@ -239,7 +239,7 @@ function draw (){
         }
 
         if(Ryu.life==0) {
-            window.location = "gameover/Ryu.html"
+            window.location = "gameover/ryu.html"
             var audio = new Audio('sound/Game Over.mp3');
             audio.play();
         }

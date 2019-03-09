@@ -266,7 +266,7 @@ function draw (){
         }
 
         if(Chun.life==0) {
-            window.location = "gameover/ryu.html"
+            window.location = "gameover/Ryu.html"
         }
 
       }
